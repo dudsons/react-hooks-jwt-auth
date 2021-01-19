@@ -18,9 +18,11 @@ const required = (value: string) => {
 
 const validEmail = (email: string) => {
     if (!isEmail(email)) {
-        <div className='alert alert-danger' role='alert'>
-            This is not valid email!
-        </div>
+        return (
+            <div className='alert alert-danger' role='alert'>
+                This is not valid email!
+            </div>
+        );
     }
 };
 
@@ -68,7 +70,7 @@ const Register = (props: any) => {
         setEmail(email);
     };
 
-    const handleLogin = (e: any) => {
+    const handleRegister = (e: any) => {
         e.preventDefault();
 
         setMessage('');
@@ -77,7 +79,8 @@ const Register = (props: any) => {
         form.current.validateAll();
 
         if (checkBtn.current._errors.length === 0) {
-            AuthService.register(username, password, email).then((response) => {
+            AuthService.register(username, password, email).then(
+                (response) => {
                     setMessage(response.data.message);
                     setSuccessful(true);
                 }, (error) => {
@@ -100,45 +103,53 @@ const Register = (props: any) => {
                     alt="profile-img"
                     className="profile-img-card"
                 />
-                <Form onSubmit={handleLogin} ref={form}>
-                    <div className="form-group">
-                        <label htmlFor='username'>Username</label>
-                        <Input
-                            type='text'
-                            className='form-control'
-                            name='username'
-                            value={username}
-                            onChange={onChangeUsername}
-                            validations={[required]}>
-                        </Input>
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor='password'>Password</label>
-                        <Input
-                            type='password'
-                            className='form-control'
-                            name='password'
-                            value={password}
-                            onChange={onChangePassword}
-                            validations={[required]}>
-                        </Input>
-                    </div>
-                    <div className="form-group">
-                        <button className="btn btn-primary btn-block" disabled={loading}>
-                            {loading && (
-                                <span className="spinner-border spinner-border-sm"></span>
-                            )}
-                            <span>Login</span>
-                        </button>
-                        {message && (
+                <Form onSubmit={handleRegister} ref={form}>
+                    {!successful && (
+                        <div>
                             <div className="form-group">
-                                <div className="alert alert-danger" role="alert">
-                                    {message}
-                                </div>
+                                <label htmlFor='username'>Username</label>
+                                <Input
+                                    type='text'
+                                    className='form-control'
+                                    name='username'
+                                    value={username}
+                                    onChange={onChangeUsername}
+                                    validations={[required, validUsername]}>
+                                </Input>
                             </div>
-                        )}
-                    </div>
-                    <CheckButton style={{display: 'none'}}></CheckButton>
+                            <div className="form-group">
+                                <label htmlFor='password'>Password</label>
+                                <Input
+                                    type='password'
+                                    className='form-control'
+                                    name='password'
+                                    value={password}
+                                    onChange={onChangePassword}
+                                    validations={[required, validPassword]}>
+                                </Input>
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor='email'>Email</label>
+                                <Input
+                                    type='text'
+                                    className='form-control'
+                                    name='email'
+                                    value={email}
+                                    onChange={onChangeEmail}
+                                    validations={[required, validEmail]}>
+                                </Input>
+                            </div>
+                            <div className="form-group">
+                                <button className="btn btn-primary btn-block"> Sign up</button>
+                            </div>
+                        </div>
+                    )}
+                    {message && (
+                        <div className="form-group">
+                            <div className={successful ? "alert alert-success" : "alert alert-danger"} role="alert">{message} </div>
+                        </div>
+                    )}
+                    <CheckButton style={{display: 'none'}} ref={checkBtn}></CheckButton>
                 </Form>
             </div>
         </div>
