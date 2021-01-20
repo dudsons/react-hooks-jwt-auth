@@ -36,7 +36,7 @@ const validUsername = (username: string) => {
     }
 };
 const validPassword = (password: string) => {
-    if (password.length < 6 || password.length > 40) {
+    if (password.length < 3 || password.length > 40) {
         return (
             <div className='alert alert-danger' role='alert'>
                 Password should be between 6 and 40 characters!
