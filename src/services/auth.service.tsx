@@ -9,7 +9,7 @@ const register = (username: string, password: string, email: string) => {
 };
 
 const login = (username: string, password: string) => {
-    return axios.post('signup', {
+    return axios.post(URL_API + 'signup', {
         username, password
     }).then((response)=>{
         if(response.data.token){ // w przykładzie nasz accessToken ale u Ciebie tak ta wartość powinna się nazywać
