@@ -31,7 +31,7 @@ function App() {
 
     return (
         <div>
-            <nav className="navbar navbar-expand navbar-dark bg-dark">
+            <nav className="navbar navbar-expand navbar-dark bg-dark ">
                 <Link to={"/"} className="navbar-brand"> bezkoder</Link>
                 <div className="navbar-nav mr-auto">
                     <li className="nav-item">
@@ -50,7 +50,7 @@ function App() {
                     )}
 
                     {currentUser && (
-                        <li>
+                        <li className="nav-item">
                             <Link to={"/user"}>User</Link>
                         </li>
                     )}
@@ -66,12 +66,12 @@ function App() {
                         </li>
                     </div>
                 ) : (
-                    <div className="navbar-nav ml-auto">
+                    <div className="navbar-nav">
                         <li className="nav-item">
-                            <Link to={"/login"}>Login</Link>
+                            <Link to={"/login"} className="login">Login</Link>
                         </li>
-                        <li>
-                            <Link to={"/register"}>Register</Link>
+                        <li className="nav-item">
+                            <Link to={"/register"} className="register">Register</Link>
                         </li>
                     </div>
 
