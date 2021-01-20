@@ -10,7 +10,7 @@ const Home = () => {
     useEffect(()=>{
         UserService.getPublicContent().then(
             (response) => {
-                setContent(response!);
+                setContent(response.data);
             },
             (error) =>{
                 const errMessage = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
