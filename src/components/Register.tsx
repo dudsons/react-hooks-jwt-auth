@@ -78,7 +78,7 @@ const Register = (props: any) => {
 
         form.current.validateAll();
 
-        if (checkBtn.current._errors.length === 0) {
+        if (checkBtn.current.context._errors.length === 0) {
             AuthService.register(username, password, email).then(
                 (response) => {
                     setMessage(response.data.message);
@@ -149,7 +149,7 @@ const Register = (props: any) => {
                             <div className={successful ? "alert alert-success" : "alert alert-danger"} role="alert">{message} </div>
                         </div>
                     )}
-                    <CheckButton style={{display: 'none'}} ref={checkBtn}></CheckButton>
+                    <CheckButton style={{display: 'none'}} ref={checkBtn}/>
                 </Form>
             </div>
         </div>

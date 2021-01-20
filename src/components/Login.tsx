@@ -42,20 +42,19 @@ const Login = (props: any) => {
         setLoading(true);
 
         form.current.validateAll();
-
-        if (checkBtn.current._errors.length === 0) {
-            AuthService.login(username, password).then(() => {
-                    props.history.push('/profile');
-                    window.location.reload();
-                }, (error) => {
-                    const errMessage = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
-                    setLoading(false);
-                    setMessage(errMessage);
-                }
-            );
-        } else {
-            setLoading(false);
-        }
+            if (checkBtn.current.context._errors.length === 0) {
+                AuthService.login(username, password).then(() => {
+                        props.history.push('/profile');
+                        window.location.reload();
+                    }, (error) => {
+                        const errMessage = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
+                        setLoading(false);
+                        setMessage(errMessage);
+                    }
+                );
+            } else {
+                setLoading(false);
+            }
     };
 
 
