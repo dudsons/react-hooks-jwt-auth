@@ -9,11 +9,11 @@ const register = (username: string, password: string, email: string) => {
 };
 
 const login = (username: string, password: string) => {
-    return axios.post(URL_API + 'signup', {
+    return axios.post(URL_API + 'signin', {
         username, password
     }).then((response)=>{
         if(response.data.token){ // w przykładzie nasz accessToken ale u Ciebie tak ta wartość powinna się nazywać
-            localStorage.setItem("user",response.data);
+            localStorage.setItem("user", JSON.stringify(response.data));
         }
         return response.data;
     })

@@ -10,7 +10,14 @@ const AdminBoard = () => {
                 setContent(response);
             },
             (error: any) => {
-                setContent(error)
+                const _content =
+                    (error.response &&
+                        error.response.data &&
+                        error.response.data.message) ||
+                    error.message ||
+                    error.toString();
+
+                setContent(_content);
             }
         )
     }, []);
