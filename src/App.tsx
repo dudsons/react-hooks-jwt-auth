@@ -51,7 +51,7 @@ function App() {
 
                     {currentUser && (
                         <li className="nav-item">
-                            <Link to={"/user"}>User</Link>
+                            <Link to={"/profile"}>Current user is : {currentUser.username}</Link>
                         </li>
                     )}
                 </div>
@@ -59,7 +59,7 @@ function App() {
                 {currentUser ? (
                     <div className="navbar-nav ml-auto">
                         <li className="nav-item">
-                            <Link to={"/profile"}>{currentUser.name}</Link>
+                            <Link to={"/profile"}>{currentUser.username}</Link>
                         </li>
                         <li className="nav-item">
                             <a href={"/login"} onClick={logout}>Logout</a>
