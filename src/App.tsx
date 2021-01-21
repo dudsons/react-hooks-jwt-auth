@@ -14,16 +14,14 @@ function App() {
     const [showModeratorBoard, setShowModeratorBoard] = useState(false);
     const [showAdminBoard, setShowAdminBoard] = useState(false);
     const [currentUser, setCurrentUser] = useState<any>(undefined);
+    const user = AuthorizationService.getCurrentUser();
 
-    useEffect(() => {
-        const user = AuthorizationService.getCurrentUser();
+    if (!currentUser  && user) {
+        setCurrentUser(user);
+        setShowAdminBoard(user.roles.includes("ROLE_ADMIN"));
+        setShowModeratorBoard(user.roles.includes("ROLE_MODERATOR"));
+    }
 
-        if (user) {
-            setCurrentUser(user);
-            setShowAdminBoard(user.roles.include("ROLE_ADMIN"));
-            setShowModeratorBoard(user.roles.include("ROLE_MODERATOR"));
-        }
-    })
 
     const logout = () => {
         AuthorizationService.logout();
